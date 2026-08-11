@@ -15,28 +15,19 @@ body {
   font-family: Arial, sans-serif;
   background: #f4f7f5;
   color: #222;
-  transition: 0.3s;
-}
-
-body.dark {
-  background: #121212;
-  color: #eee;
 }
 
 header {
   background: linear-gradient(135deg, #1b5e20, #388e3c);
   color: white;
   padding: 28px 20px;
+  text-align: center;
   border-radius: 0 0 25px 25px;
 }
 
 header h1 {
   margin: 0;
   font-size: 28px;
-}
-
-header p {
-  margin-bottom: 0;
 }
 
 .container {
@@ -47,92 +38,58 @@ header p {
 
 .search {
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   border: none;
   border-radius: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  font-size: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,.12);
 }
 
 .card {
   background: white;
   padding: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   border-radius: 18px;
   box-shadow: 0 3px 12px rgba(0,0,0,.08);
 }
 
-.dark .card {
-  background: #1e1e1e;
-}
-
 .card h2 {
   color: #1b5e20;
-  margin-top: 0;
 }
 
-.dark .card h2 {
-  color: #81c784;
-}
-
-.verse {
-  font-size: 19px;
-  line-height: 1.6;
-  font-style: italic;
-}
-
-button {
-  background: #1b5e20;
-  color: white;
-  border: none;
-  padding: 12px 17px;
-  border-radius: 10px;
-  font-size: 15px;
-  margin: 5px 3px;
-}
-
-button:hover {
-  background: #2e7d32;
-}
-
-.grid {
+.books {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
-.topic {
-  padding: 18px;
+.book {
   background: #e8f5e9;
-  border-radius: 14px;
-  text-align: center;
+  border: none;
+  color: #1b5e20;
+  padding: 14px 8px;
+  border-radius: 10px;
   font-weight: bold;
+  font-size: 15px;
 }
 
-.dark .topic {
-  background: #263b29;
+.book:hover {
+  background: #c8e6c9;
+}
+
+#bookMessage {
+  display: none;
+  margin-top: 18px;
+  padding: 15px;
+  background: #e8f5e9;
+  border-radius: 10px;
 }
 
 footer {
   text-align: center;
   padding: 25px;
   color: #777;
-}
-
-.dark footer {
-  color: #aaa;
-}
-
-#message {
-  display: none;
-  margin-top: 12px;
-  padding: 12px;
-  background: #e8f5e9;
-  border-radius: 10px;
-}
-
-.dark #message {
-  background: #263b29;
 }
 </style>
 </head>
@@ -146,170 +103,161 @@ footer {
 
 <div class="container">
 
-  <input
-    class="search"
-    type="text"
-    id="search"
-    placeholder="🔍 Search Bible studies..."
-    onkeyup="searchStudy()"
-  >
+<input
+  class="search"
+  id="search"
+  type="text"
+  placeholder="🔍 Search for a Bible book..."
+  onkeyup="searchBooks()"
+>
 
-  <div class="card">
-    <h2>🌅 Today's Bible Verse</h2>
+<div class="card">
+  <h2>📜 Today's Bible Verse</h2>
 
-    <p class="verse">
-      “Trust in the LORD with all thine heart; and lean not unto thine own
-      understanding.”
-    </p>
+  <p>
+    “Trust in the LORD with all thine heart; and lean not unto thine own
+    understanding.”
+  </p>
 
-    <strong>Proverbs 3:5</strong>
+  <strong>Proverbs 3:5</strong>
+</div>
 
-    <br><br>
+<div class="card">
+  <h2>📚 Old Testament</h2>
 
-    <button onclick="favoriteVerse()">❤️ Favorite</button>
-    <button onclick="shareVerse()">📤 Share</button>
+  <div class="books" id="oldTestament">
 
-    <div id="message"></div>
+    <button class="book" onclick="openBook('Genesis')">Genesis</button>
+    <button class="book" onclick="openBook('Exodus')">Exodus</button>
+    <button class="book" onclick="openBook('Leviticus')">Leviticus</button>
+    <button class="book" onclick="openBook('Numbers')">Numbers</button>
+    <button class="book" onclick="openBook('Deuteronomy')">Deuteronomy</button>
+    <button class="book" onclick="openBook('Joshua')">Joshua</button>
+    <button class="book" onclick="openBook('Judges')">Judges</button>
+    <button class="book" onclick="openBook('Ruth')">Ruth</button>
+    <button class="book" onclick="openBook('1 Samuel')">1 Samuel</button>
+    <button class="book" onclick="openBook('2 Samuel')">2 Samuel</button>
+    <button class="book" onclick="openBook('1 Kings')">1 Kings</button>
+    <button class="book" onclick="openBook('2 Kings')">2 Kings</button>
+    <button class="book" onclick="openBook('1 Chronicles')">1 Chronicles</button>
+    <button class="book" onclick="openBook('2 Chronicles')">2 Chronicles</button>
+    <button class="book" onclick="openBook('Ezra')">Ezra</button>
+    <button class="book" onclick="openBook('Nehemiah')">Nehemiah</button>
+    <button class="book" onclick="openBook('Esther')">Esther</button>
+    <button class="book" onclick="openBook('Job')">Job</button>
+    <button class="book" onclick="openBook('Psalms')">Psalms</button>
+    <button class="book" onclick="openBook('Proverbs')">Proverbs</button>
+    <button class="book" onclick="openBook('Ecclesiastes')">Ecclesiastes</button>
+    <button class="book" onclick="openBook('Song of Solomon')">Song of Solomon</button>
+    <button class="book" onclick="openBook('Isaiah')">Isaiah</button>
+    <button class="book" onclick="openBook('Jeremiah')">Jeremiah</button>
+    <button class="book" onclick="openBook('Lamentations')">Lamentations</button>
+    <button class="book" onclick="openBook('Ezekiel')">Ezekiel</button>
+    <button class="book" onclick="openBook('Daniel')">Daniel</button>
+    <button class="book" onclick="openBook('Hosea')">Hosea</button>
+    <button class="book" onclick="openBook('Joel')">Joel</button>
+    <button class="book" onclick="openBook('Amos')">Amos</button>
+    <button class="book" onclick="openBook('Obadiah')">Obadiah</button>
+    <button class="book" onclick="openBook('Jonah')">Jonah</button>
+    <button class="book" onclick="openBook('Micah')">Micah</button>
+    <button class="book" onclick="openBook('Nahum')">Nahum</button>
+    <button class="book" onclick="openBook('Habakkuk')">Habakkuk</button>
+    <button class="book" onclick="openBook('Zephaniah')">Zephaniah</button>
+    <button class="book" onclick="openBook('Haggai')">Haggai</button>
+    <button class="book" onclick="openBook('Zechariah')">Zechariah</button>
+    <button class="book" onclick="openBook('Malachi')">Malachi</button>
+
+  </div>
+</div>
+
+<div class="card">
+  <h2>✝️ New Testament</h2>
+
+  <div class="books" id="newTestament">
+
+    <button class="book" onclick="openBook('Matthew')">Matthew</button>
+    <button class="book" onclick="openBook('Mark')">Mark</button>
+    <button class="book" onclick="openBook('Luke')">Luke</button>
+    <button class="book" onclick="openBook('John')">John</button>
+    <button class="book" onclick="openBook('Acts')">Acts</button>
+    <button class="book" onclick="openBook('Romans')">Romans</button>
+    <button class="book" onclick="openBook('1 Corinthians')">1 Corinthians</button>
+    <button class="book" onclick="openBook('2 Corinthians')">2 Corinthians</button>
+    <button class="book" onclick="openBook('Galatians')">Galatians</button>
+    <button class="book" onclick="openBook('Ephesians')">Ephesians</button>
+    <button class="book" onclick="openBook('Philippians')">Philippians</button>
+    <button class="book" onclick="openBook('Colossians')">Colossians</button>
+    <button class="book" onclick="openBook('1 Thessalonians')">1 Thessalonians</button>
+    <button class="book" onclick="openBook('2 Thessalonians')">2 Thessalonians</button>
+    <button class="book" onclick="openBook('1 Timothy')">1 Timothy</button>
+    <button class="book" onclick="openBook('2 Timothy')">2 Timothy</button>
+    <button class="book" onclick="openBook('Titus')">Titus</button>
+    <button class="book" onclick="openBook('Philemon')">Philemon</button>
+    <button class="book" onclick="openBook('Hebrews')">Hebrews</button>
+    <button class="book" onclick="openBook('James')">James</button>
+    <button class="book" onclick="openBook('1 Peter')">1 Peter</button>
+    <button class="book" onclick="openBook('2 Peter')">2 Peter</button>
+    <button class="book" onclick="openBook('1 John')">1 John</button>
+    <button class="book" onclick="openBook('2 John')">2 John</button>
+    <button class="book" onclick="openBook('3 John')">3 John</button>
+    <button class="book" onclick="openBook('Jude')">Jude</button>
+    <button class="book" onclick="openBook('Revelation')">Revelation</button>
+
   </div>
 
-  <div class="card" id="study">
-    <h2>📚 Today's Bible Study</h2>
+  <div id="bookMessage"></div>
 
-    <h3>Walking in Faith</h3>
+</div>
 
-    <p>
-      Faith means trusting God even when we cannot see the whole picture.
-      God's Word teaches us to depend on Him and follow His direction.
-    </p>
+<div class="card">
+  <h2>🙏 Prayer</h2>
 
-    <button onclick="startStudy()">Start Bible Study</button>
-
-    <div id="studyMessage"></div>
-  </div>
-
-  <div class="card">
-    <h2>📖 Bible</h2>
-
-    <div class="grid">
-      <div class="topic">Genesis</div>
-      <div class="topic">Psalms</div>
-      <div class="topic">Proverbs</div>
-      <div class="topic">Matthew</div>
-      <div class="topic">John</div>
-      <div class="topic">Romans</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>🔥 Study Topics</h2>
-
-    <div class="grid">
-      <div class="topic">Faith</div>
-      <div class="topic">Prayer</div>
-      <div class="topic">Obedience</div>
-      <div class="topic">Love</div>
-      <div class="topic">Wisdom</div>
-      <div class="topic">Purpose</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>🙏 Today's Prayer</h2>
-
-    <p>
-      Lord, help me to trust You, obey Your Word, and grow stronger in faith
-      every day. Give me wisdom to make the right decisions and strength to
-      follow Your will. Amen.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>⚙️ App Settings</h2>
-
-    <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
-  </div>
+  <p>
+    Lord, help me to understand Your Word, grow in faith,
+    and live according to Your will. Amen.
+  </p>
+</div>
 
 </div>
 
 <footer>
-  © 2026 Bible Study App<br>
-  Built to help believers grow in God's Word.
+  © 2026 Bible Study App
 </footer>
 
 <script>
 
-function startStudy() {
-  document.getElementById("studyMessage").innerHTML =
-    "<p><strong>Welcome to your Bible study! 🙏</strong><br>" +
-    "Take a few minutes today to read God's Word, meditate on it, " +
-    "and put it into practice.</p>";
+function openBook(book) {
 
-  document.getElementById("studyMessage").style.display = "block";
+  const message = document.getElementById("bookMessage");
+
+  message.innerHTML =
+    "<strong>📖 " + book + "</strong><br><br>" +
+    "You selected " + book + ".<br>" +
+    "The chapter and verse reader will be added next. 🙏";
+
+  message.style.display = "block";
 }
 
-function favoriteVerse() {
-  localStorage.setItem(
-    "favoriteVerse",
-    "Proverbs 3:5 - Trust in the LORD with all thine heart."
-  );
+function searchBooks() {
 
-  document.getElementById("message").innerHTML =
-    "❤️ Verse added to your favorites!";
-  document.getElementById("message").style.display = "block";
-}
+  const search =
+    document.getElementById("search").value.toLowerCase();
 
-function shareVerse() {
-  const text =
-    "Proverbs 3:5 - Trust in the LORD with all thine heart.";
+  const books =
+    document.querySelectorAll(".book");
 
-  if (navigator.share) {
-    navigator.share({
-      title: "Bible Study App",
-      text: text
-    });
-  } else {
-    navigator.clipboard.writeText(text);
+  books.forEach(function(book) {
 
-    document.getElementById("message").innerHTML =
-      "📋 Verse copied. You can now share it.";
-    document.getElementById("message").style.display = "block";
-  }
-}
+    const name =
+      book.textContent.toLowerCase();
 
-function toggleDarkMode() {
-  document.body.classList.toggle("dark");
+    if (name.includes(search)) {
+      book.style.display = "block";
+    } else {
+      book.style.display = "none";
+    }
 
-  if (document.body.classList.contains("dark")) {
-    localStorage.setItem("darkMode", "on");
-  } else {
-    localStorage.setItem("darkMode", "off");
-  }
-}
-
-function searchStudy() {
-  const search = document
-    .getElementById("search")
-    .value
-    .toLowerCase();
-
-  const study = document.getElementById("study");
-
-  if (search === "") {
-    study.style.display = "block";
-    return;
-  }
-
-  if (
-    study.innerText.toLowerCase().includes(search)
-  ) {
-    study.style.display = "block";
-  } else {
-    study.style.display = "none";
-  }
-}
-
-if (localStorage.getItem("darkMode") === "on") {
-  document.body.classList.add("dark");
+  });
 }
 
 </script>
