@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Study App</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #222;
+}
+
+header {
+  background: #173f5f;
+  color: white;
+  padding: 25px 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  margin: 8px 0 0;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #173f5f;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 13px 18px;
+  margin: 5px;
+  background: #f2b134;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.verse {
+  font-size: 20px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.reference {
+  color: #173f5f;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+nav {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+nav button {
+  background: #173f5f;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>📖 Bible Study</h1>
+  <p>Grow in God's Word Every Day</p>
+</header>
+
+<div class="container">
+
+  <section id="home">
+
+    <div class="card">
+      <h2>🌅 Verse of the Day</h2>
+      <p class="verse">
+        "Trust in the LORD with all thine heart; and lean not unto thine own understanding."
+      </p>
+      <p class="reference">Proverbs 3:5 — KJV</p>
+    </div>
+
+    <div class="card">
+      <h2>🙏 Today's Prayer</h2>
+      <p>
+        Heavenly Father, help me to trust You completely.
+        Give me wisdom, strength and grace to follow Your Word today.
+        In Jesus' name, Amen.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>📚 Bible Study</h2>
+      <p>
+        Explore God's Word and discover how it applies to your daily life.
+      </p>
+      <button onclick="showSection('study')">Start Studying</button>
+    </div>
+
+  </section>
+
+  <section id="study" class="hidden">
+
+    <div class="card">
+      <h2>📖 Bible Topics</h2>
+
+      <button onclick="showTopic('faith')">Faith</button>
+      <button onclick="showTopic('prayer')">Prayer</button>
+      <button onclick="showTopic('obedience')">Obedience</button>
+      <button onclick="showTopic('love')">Love</button>
+      <button onclick="showTopic('salvation')">Salvation</button>
+
+      <div id="topicContent" style="margin-top:20px;"></div>
+    </div>
+
+  </section>
+
+  <section id="notes" class="hidden">
+
+    <div class="card">
+      <h2>📝 My Bible Notes</h2>
+
+      <input id="noteTitle" type="text" placeholder="Note title">
+
+      <textarea id="noteText" rows="8"
+        placeholder="Write your Bible study notes here..."></textarea>
+
+      <button onclick="saveNote()">Save Note</button>
+
+      <div id="savedNotes"></div>
+    </div>
+
+  </section>
+
+  <section id="search" class="hidden">
+
+    <div class="card">
+      <h2>🔎 Search the App</h2>
+
+      <input id="searchBox"
+        type="text"
+        placeholder="Search topics such as faith, prayer...">
+
+      <button onclick="searchBible()">Search</button>
+
+      <div id="searchResults"></div>
+    </div>
+
+  </section>
+
+</div>
+
+<nav>
+  <button onclick="showSection('home')">🏠 Home</button>
+  <button onclick="showSection('study')">📖 Study</button>
+  <button onclick="showSection('notes')">📝 Notes</button>
+  <button onclick="showSection('search')">🔎 Search</button>
+</nav>
+
+<script>
+
+function showSection(section) {
+
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("study").classList.add("hidden");
+  document.getElementById("notes").classList.add("hidden");
+  document.getElementById("search").classList.add("hidden");
+
+  document.getElementById(section).classList.remove("hidden");
+
+  window.scrollTo(0, 0);
+}
+
+function showTopic(topic) {
+
+  let content = "";
+
+  if (topic === "faith") {
+    content = `
+      <h3>Faith</h3>
+      <p>
+      Faith means trusting God even when we cannot see the outcome.
+      </p>
+      <p class="verse">
+      "Now faith is the substance of things hoped for, the evidence of things not seen."
+      </p>
+      <p class="reference">Hebrews 11:1 — KJV</p>
+    `;
+  }
+
+  if (topic === "prayer") {
+    content = `
+      <h3>Prayer</h3>
+      <p>
+      Prayer is our communication with God. We can bring our
+      thanksgiving, needs and concerns before Him.
+      </p>
+      <p class="verse">
+      "Pray without ceasing."
+      </p>
+      <p class="reference">1 Thessalonians 5:17 — KJV</p>
+    `;
+  }
+
+  if (topic === "obedience") {
+    content = `
+      <h3>Obedience</h3>
+      <p>
+      Obedience demonstrates our love for God and our willingness
+      to follow His instructions.
+      </p>
+      <p class="verse">
+      "If ye be willing and obedient, ye shall eat the good of the land."
+      </p>
+      <p class="reference">Isaiah 1:19 — KJV</p>
+    `;
+  }
+
+  if (topic === "love") {
+    content = `
+      <h3>Love</h3>
+      <p>
+      Christian love means showing kindness, patience and compassion
+      to others.
+      </p>
+      <p class="verse">
+      "God is love."
+      </p>
+      <p class="reference">1 John 4:8 — KJV</p>
+    `;
+  }
+
+  if (topic === "salvation") {
+    content = `
+      <h3>Salvation</h3>
+      <p>
+      Salvation is God's gift through Jesus Christ. We receive it
+      through faith in Him.
+      </p>
+      <p class="verse">
+      "For by grace are ye saved through faith."
+      </p>
+      <p class="reference">Ephesians 2:8 — KJV</p>
+    `;
+  }
+
+  document.getElementById("topicContent").innerHTML = content;
+}
+
+function saveNote() {
+
+  let title = document.getElementById("noteTitle").value;
+  let text = document.getElementById("noteText").value;
+
+  if (title === "" || text === "") {
+    alert("Please enter a title and your note.");
+    return;
+  }
+
+  let notes = JSON.parse(localStorage.getItem("bibleNotes") || "[]");
+
+  notes.push({
+    title: title,
+    text: text
+  });
+
+  localStorage.setItem("bibleNotes", JSON.stringify(notes));
+
+  document.getElementById("noteTitle").value = "";
+  document.getElementById("noteText").value = "";
+
+  displayNotes();
+}
+
+function displayNotes() {
+
+  let notes = JSON.parse(localStorage.getItem("bibleNotes") || "[]");
+
+  let output = "";
+
+  notes.forEach(function(note) {
+
+    output += `
+      <div class="card">
+        <h3>${note.title}</h3>
+        <p>${note.text}</p>
+      </div>
+    `;
+
+  });
+
+  document.getElementById("savedNotes").innerHTML = output;
+}
+
+function searchBible() {
+
+  let search = document.getElementById("searchBox").value.toLowerCase();
+
+  let results = "";
+
+  if (search.includes("faith")) {
+    results += "<p>📖 Faith — Hebrews 11:1</p>";
+  }
+
+  if (search.includes("prayer")) {
+    results += "<p>🙏 Prayer — 1 Thessalonians 5:17</p>";
+  }
+
+  if (search.includes("obedience")) {
+    results += "<p>❤️ Obedience — Isaiah 1:19</p>";
+  }
+
+  if (search.includes("love")) {
+    results += "<p>❤️ Love — 1 John 4:8</p>";
+  }
+
+  if (search.includes("salvation")) {
+    results += "<p>✝️ Salvation — Ephesians 2:8</p>";
+  }
+
+  if (results === "") {
+    results = "<p>No topic found. Try Faith, Prayer, Obedience, Love or Salvation.</p>";
+  }
+
+  document.getElementById("searchResults").innerHTML = results;
+}
+
+displayNotes();
+
+</script>
+
+</body>
+</html>
